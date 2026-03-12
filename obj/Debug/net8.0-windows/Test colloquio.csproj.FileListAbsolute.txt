@@ -1,0 +1,16 @@
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\Test colloquio.exe
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\Test colloquio.deps.json
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\Test colloquio.runtimeconfig.json
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\Test colloquio.dll
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\Test colloquio.pdb
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.csproj.GenerateResource.cache
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.AssemblyInfoInputs.cache
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.AssemblyInfo.cs
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.csproj.CoreCompileInputs.cache
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.dll
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\refint\Test colloquio.dll
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.pdb
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.genruntimeconfig.cache
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\ref\Test colloquio.dll
+C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test_colloquio.Form1.resources
