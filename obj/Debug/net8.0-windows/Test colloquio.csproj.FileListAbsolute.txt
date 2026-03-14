@@ -62,3 +62,4 @@ C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\runtimes\win
 C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test colloquio.csproj.AssemblyReference.cache
 C:\Users\Giova\source\repos\Test colloquio\obj\Debug\net8.0-windows\Test col.648FE5AD.Up2Date
+C:\Users\Giova\source\repos\Test colloquio\bin\Debug\net8.0-windows\config.ini

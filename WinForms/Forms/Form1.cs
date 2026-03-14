@@ -8,44 +8,25 @@ namespace Test_colloquio
 {
     public class Form1 : Form
     {
-        // ----------------------------------------------------------------
-        // Campi
-        // ----------------------------------------------------------------
         private readonly Repository _repo;
-
-        /// <summary>
-        /// null = nessun filtro attivo (modalità "vedi tutti")
-        /// lista di Id = filtro ricerca attivo
-        /// </summary>
-        private List<int> _filtroEsameIds = null;
-
-        /// <summary>
-        /// Flag per evitare le reazioni a cascata durante l'aggiornamento
-        /// programmatico delle listbox.
-        /// </summary>
+        private List<int>? _filtroEsameIds = null;
         private bool _aggiornando = false;
 
-        // ---- Controlli ----
-        private ListBox        lstAmbulatori;
-        private ListBox        lstPartiCorpo;
-        private ListBox        lstEsami;
+        private ListBox      lstAmbulatori = null!;
+        private ListBox      lstPartiCorpo = null!;
+        private ListBox      lstEsami      = null!;
+        private TextBox      txtRicerca    = null!;
+        private RadioButton  rdoCodMin     = null!;
+        private RadioButton  rdoCodInt     = null!;
+        private RadioButton  rdoDesc       = null!;
+        private Button       btnCerca      = null!;
+        private Button       btnVediTutti  = null!;
+        private DataGridView grid          = null!;
+        private Button       btnConferma   = null!;
+        private Button       btnRimuovi    = null!;
+        private Button       btnSu         = null!;
+        private Button       btnGiu        = null!;
 
-        private TextBox        txtRicerca;
-        private RadioButton    rdoCodMin;
-        private RadioButton    rdoCodInt;
-        private RadioButton    rdoDesc;
-        private Button         btnCerca;
-        private Button         btnVediTutti;
-
-        private DataGridView   grid;
-        private Button         btnConferma;
-        private Button         btnRimuovi;
-        private Button         btnSu;
-        private Button         btnGiu;
-
-        // ----------------------------------------------------------------
-        // Costruttore
-        // ----------------------------------------------------------------
         public Form1()
         {
             _repo = new Repository(Predefiniti_Database.ConnectionString);
@@ -54,33 +35,23 @@ namespace Test_colloquio
             ApplicaRicercaPredefinita();
         }
 
-        // ================================================================
-        //  COSTRUZIONE INTERFACCIA
-        // ================================================================
         private void BuildUI()
         {
-            Text            = "Nolex – Selezione Esami";
-            Size            = new Size(1150, 780);
-            MinimumSize     = new Size(950, 650);
-            StartPosition   = FormStartPosition.CenterScreen;
-
-            // I pannelli vanno aggiunti al form in ordine inverso perché
-            // DockStyle.Top li impila dall'alto e DockStyle.Fill occupa
-            // quanto rimane: prima aggiungiamo Fill, poi le Top dall'ultima
-            // alla prima.
+            Text          = "Selezione Esami";
+            Size          = new Size(1150, 780);
+            MinimumSize   = new Size(950, 650);
+            StartPosition = FormStartPosition.CenterScreen;
 
             var pnlGrid    = BuildGridPanel();
             var pnlTre     = BuildTrePannelli();
             var pnlRicerca = BuildRicercaPanel();
 
-
-            Controls.Add(pnlGrid);      // Fill
-            Controls.Add(pnlTre);       // Top (secondo)
-            Controls.Add(pnlRicerca);   // Top (primo)
+            Controls.Add(pnlGrid);
+            Controls.Add(pnlTre);
+            Controls.Add(pnlRicerca);
         }
 
-        // ---- Pannello di ricerca ----------------------------------------
-        private Control BuildRicercaPanel()
+        private GroupBox BuildRicercaPanel()
         {
             var grp = new GroupBox
             {
@@ -100,44 +71,34 @@ namespace Test_colloquio
             rdoCodInt = new RadioButton { Text = "Cod. Interno",       Left = 410, Top = 26, AutoSize = true };
             rdoDesc   = new RadioButton { Text = "Descrizione",         Left = 520, Top = 26, AutoSize = true, Checked = true };
 
-            btnCerca    = new Button { Text = "Cerca",     Left = 638, Top = 23, Width = 85, Height = 26 };
+            btnCerca     = new Button { Text = "Cerca",     Left = 638, Top = 23, Width = 85, Height = 26 };
             btnVediTutti = new Button { Text = "Vedi tutti", Left = 730, Top = 23, Width = 85, Height = 26 };
 
             btnCerca.Click     += (s, e) => EseguiRicerca();
             btnVediTutti.Click += (s, e) => ResetRicerca();
 
-            grp.Controls.AddRange(new Control[]
-                { txtRicerca, rdoCodMin, rdoCodInt, rdoDesc, btnCerca, btnVediTutti });
-
+            grp.Controls.AddRange([txtRicerca, rdoCodMin, rdoCodInt, rdoDesc, btnCerca, btnVediTutti]);
             return grp;
         }
 
-        // ---- Pannello tre listbox + pulsante conferma ------------------
-        private Control BuildTrePannelli()
+        private Panel BuildTrePannelli()
         {
             var pnl = new Panel { Dock = DockStyle.Top, Height = 330, Padding = new Padding(6) };
 
-            // -- Ambulatori --
-            var grpAmb = new GroupBox
-                { Text = "Ambulatori", Left = 6, Top = 6, Width = 220, Height = 318 };
+            var grpAmb = new GroupBox { Text = "Ambulatori", Left = 6, Top = 6, Width = 220, Height = 318 };
             lstAmbulatori = new ListBox { Dock = DockStyle.Fill };
             lstAmbulatori.SelectedIndexChanged += OnAmbulatoriChanged;
             grpAmb.Controls.Add(lstAmbulatori);
 
-            // -- Parti del corpo --
-            var grpPC = new GroupBox
-                { Text = "Parti del corpo", Left = 232, Top = 6, Width = 220, Height = 318 };
+            var grpPC = new GroupBox { Text = "Parti del corpo", Left = 232, Top = 6, Width = 220, Height = 318 };
             lstPartiCorpo = new ListBox { Dock = DockStyle.Fill };
             lstPartiCorpo.SelectedIndexChanged += OnPartiCorpoChanged;
             grpPC.Controls.Add(lstPartiCorpo);
 
-            // -- Esami --
-            var grpEsami = new GroupBox
-                { Text = "Esami", Left = 458, Top = 6, Width = 360, Height = 318 };
+            var grpEsami = new GroupBox { Text = "Esami", Left = 458, Top = 6, Width = 360, Height = 318 };
             lstEsami = new ListBox { Dock = DockStyle.Fill };
             grpEsami.Controls.Add(lstEsami);
 
-            // -- Pulsante conferma --
             btnConferma = new Button
             {
                 Text   = "Conferma scelta ▶",
@@ -149,12 +110,11 @@ namespace Test_colloquio
             };
             btnConferma.Click += OnConfermaClick;
 
-            pnl.Controls.AddRange(new Control[] { grpAmb, grpPC, grpEsami, btnConferma });
+            pnl.Controls.AddRange([grpAmb, grpPC, grpEsami, btnConferma]);
             return pnl;
         }
 
-        // ---- Pannello griglia ------------------------------------------
-        private Control BuildGridPanel()
+        private GroupBox BuildGridPanel()
         {
             var grp = new GroupBox
             {
@@ -163,7 +123,6 @@ namespace Test_colloquio
                 Padding = new Padding(6)
             };
 
-            // Pulsanti destra
             var pnlBtn = new Panel { Dock = DockStyle.Right, Width = 110, Padding = new Padding(4) };
 
             btnRimuovi = new Button { Text = "❌ Rimuovi", Dock = DockStyle.Top, Height = 34 };
@@ -174,57 +133,58 @@ namespace Test_colloquio
             btnSu.Click      += OnSuClick;
             btnGiu.Click     += OnGiuClick;
 
-            // Top dock si impila dall'alto, quindi inseriamo in ordine inverso
             pnlBtn.Controls.Add(btnGiu);
             pnlBtn.Controls.Add(btnSu);
             pnlBtn.Controls.Add(btnRimuovi);
 
-            // Griglia
             grid = new DataGridView
             {
-                Dock                         = DockStyle.Fill,
-                AllowUserToAddRows           = false,
-                AllowUserToDeleteRows        = false,
-                ReadOnly                     = true,
-                SelectionMode                = DataGridViewSelectionMode.FullRowSelect,
-                AutoSizeColumnsMode          = DataGridViewAutoSizeColumnsMode.Fill,
-                RowHeadersVisible            = false,
-                BackgroundColor              = SystemColors.Window,
-                BorderStyle                  = BorderStyle.None,
-                MultiSelect                  = false
+                Dock                  = DockStyle.Fill,
+                AllowUserToAddRows    = false,
+                AllowUserToDeleteRows = false,
+                ReadOnly              = true,
+                SelectionMode         = DataGridViewSelectionMode.FullRowSelect,
+                AutoSizeColumnsMode   = DataGridViewAutoSizeColumnsMode.Fill,
+                RowHeadersVisible     = false,
+                BackgroundColor       = SystemColors.Window,
+                BorderStyle           = BorderStyle.None,
+                MultiSelect           = false
             };
             grid.Columns.Add("CodiceMinisteriale", "Cod. Ministeriale");
             grid.Columns.Add("CodiceInterno",      "Cod. Interno");
             grid.Columns.Add("DescrizioneEsame",   "Descrizione Esame");
-            grid.Columns["CodiceMinisteriale"].FillWeight = 20;
-            grid.Columns["CodiceInterno"].FillWeight      = 20;
-            grid.Columns["DescrizioneEsame"].FillWeight   = 60;
+            grid.Columns.Add("DurataMinuti",        "Durata (min)");
+            grid.Columns["CodiceMinisteriale"].FillWeight = 18;
+            grid.Columns["CodiceInterno"].FillWeight      = 18;
+            grid.Columns["DescrizioneEsame"].FillWeight   = 52;
+            grid.Columns["DurataMinuti"].FillWeight       = 12;
 
             grp.Controls.Add(grid);
             grp.Controls.Add(pnlBtn);
             return grp;
         }
 
-        // ================================================================
-        //  CARICAMENTO DATI E CASCATA
-        // ================================================================
-
-        private void CaricaAmbulatori(List<Ambulatorio> override_ = null)
+        private void CaricaAmbulatori()
         {
             _aggiornando = true;
             lstAmbulatori.Items.Clear();
-            var items = override_ ?? _repo.GetAmbulatori(_filtroEsameIds);
-            foreach (var a in items) lstAmbulatori.Items.Add(a);
+
+            try
+            {
+                var items = _repo.GetAmbulatori(_filtroEsameIds);
+                foreach (var a in items) lstAmbulatori.Items.Add(a);
+            }
+            catch (Exception ex)
+            {
+                MostraErroreDb(ex);
+            }
+
             _aggiornando = false;
 
-            // Seleziona sempre il primo elemento
             if (lstAmbulatori.Items.Count > 0)
                 lstAmbulatori.SelectedIndex = 0;
             else
-            {
-                // Nessun ambulatorio: pulisce anche gli altri pannelli
                 CaricaPartiCorpo();
-            }
         }
 
         private void CaricaPartiCorpo()
@@ -234,8 +194,15 @@ namespace Test_colloquio
 
             if (lstAmbulatori.SelectedItem is Ambulatorio amb)
             {
-                var items = _repo.GetPartiCorpo(amb.Id, _filtroEsameIds);
-                foreach (var pc in items) lstPartiCorpo.Items.Add(pc);
+                try
+                {
+                    var items = _repo.GetPartiCorpo(amb.Id, _filtroEsameIds);
+                    foreach (var pc in items) lstPartiCorpo.Items.Add(pc);
+                }
+                catch (Exception ex)
+                {
+                    MostraErroreDb(ex);
+                }
             }
 
             _aggiornando = false;
@@ -250,35 +217,34 @@ namespace Test_colloquio
         {
             lstEsami.Items.Clear();
 
-            if (!(lstAmbulatori.SelectedItem is Ambulatorio amb)) return;
-            if (!(lstPartiCorpo.SelectedItem is ParteCorpo pc))   return;
+            if (lstAmbulatori.SelectedItem is not Ambulatorio amb) return;
+            if (lstPartiCorpo.SelectedItem is not ParteCorpo pc)   return;
 
-            var items = _repo.GetEsami(amb.Id, pc.Id, _filtroEsameIds);
-            foreach (var e in items) lstEsami.Items.Add(e);
+            try
+            {
+                var items = _repo.GetEsami(amb.Id, pc.Id, _filtroEsameIds);
+                foreach (var e in items) lstEsami.Items.Add(e);
+            }
+            catch (Exception ex)
+            {
+                MostraErroreDb(ex);
+            }
 
             if (lstEsami.Items.Count > 0)
                 lstEsami.SelectedIndex = 0;
         }
 
-        // ================================================================
-        //  EVENT HANDLERS – Listbox
-        // ================================================================
-
-        private void OnAmbulatoriChanged(object sender, EventArgs e)
+        private void OnAmbulatoriChanged(object? sender, EventArgs e)
         {
             if (_aggiornando) return;
             CaricaPartiCorpo();
         }
 
-        private void OnPartiCorpoChanged(object sender, EventArgs e)
+        private void OnPartiCorpoChanged(object? sender, EventArgs e)
         {
             if (_aggiornando) return;
             CaricaEsami();
         }
-
-        // ================================================================
-        //  RICERCA
-        // ================================================================
 
         private void EseguiRicerca()
         {
@@ -289,11 +255,27 @@ namespace Test_colloquio
                          : rdoCodInt.Checked ? "CodiceInterno"
                                              : "DescrizioneEsame";
 
-            var risultati     = _repo.SearchEsami(campo, testo);
-            _filtroEsameIds   = risultati.Select(r => r.Id).ToList();
+            try
+            {
+                var risultati = _repo.SearchEsami(campo, testo);
+                _filtroEsameIds = [.. risultati.Select(r => r.Id)];
+            }
+            catch (Exception ex)
+            {
+                MostraErroreDb(ex);
+                return;
+            }
 
-            // Ricarica ambulatori filtrati; la cascata aggiorna gli altri pannelli
             CaricaAmbulatori();
+
+            if (_filtroEsameIds.Count == 0)
+            {
+                MessageBox.Show(
+                    "Nessun risultato trovato.",
+                    "Ricerca",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
         private void ResetRicerca()
@@ -305,11 +287,6 @@ namespace Test_colloquio
 
         private void ApplicaRicercaPredefinita()
         {
-            string testo = Predefiniti_Ricerca.RicercaPredefinita;
-            if (string.IsNullOrWhiteSpace(testo)) return;
-
-            txtRicerca.Text = testo;
-
             switch (Predefiniti_Ricerca.TipoRicercaPredefinita)
             {
                 case "CodiceMinisteriale": rdoCodMin.Checked = true; break;
@@ -317,16 +294,16 @@ namespace Test_colloquio
                 default:                   rdoDesc.Checked   = true; break;
             }
 
+            string testo = Predefiniti_Ricerca.RicercaPredefinita;
+            if (string.IsNullOrWhiteSpace(testo)) return;
+
+            txtRicerca.Text = testo;
             EseguiRicerca();
         }
 
-        // ================================================================
-        //  GRIGLIA – Conferma e gestione righe
-        // ================================================================
-
-        private void OnConfermaClick(object sender, EventArgs e)
+        private void OnConfermaClick(object? sender, EventArgs e)
         {
-            if (!(lstEsami.SelectedItem is Esame esame))
+            if (lstEsami.SelectedItem is not Esame esame)
             {
                 MessageBox.Show(
                     "Seleziona un esame dalla lista prima di confermare.",
@@ -339,26 +316,25 @@ namespace Test_colloquio
             grid.Rows.Add(
                 esame.CodiceMinisteriale,
                 esame.CodiceInterno,
-                esame.DescrizioneEsame);
+                esame.DescrizioneEsame,
+                esame.DurataMinuti.HasValue ? (object)esame.DurataMinuti.Value : "");
 
-            // Seleziona la riga appena aggiunta
             grid.ClearSelection();
-            grid.Rows[grid.Rows.Count - 1].Selected = true;
+            grid.Rows[^1].Selected = true;
         }
 
-        private void OnRimuoviClick(object sender, EventArgs e)
+        private void OnRimuoviClick(object? sender, EventArgs e)
         {
             if (grid.SelectedRows.Count == 0) return;
 
             int idx = grid.SelectedRows[0].Index;
             grid.Rows.RemoveAt(idx);
 
-            // Mantiene la selezione sulla riga vicina
             if (grid.Rows.Count > 0)
                 grid.Rows[Math.Min(idx, grid.Rows.Count - 1)].Selected = true;
         }
 
-        private void OnSuClick(object sender, EventArgs e)
+        private void OnSuClick(object? sender, EventArgs e)
         {
             if (grid.SelectedRows.Count == 0) return;
             int idx = grid.SelectedRows[0].Index;
@@ -367,7 +343,7 @@ namespace Test_colloquio
             grid.Rows[idx - 1].Selected = true;
         }
 
-        private void OnGiuClick(object sender, EventArgs e)
+        private void OnGiuClick(object? sender, EventArgs e)
         {
             if (grid.SelectedRows.Count == 0) return;
             int idx = grid.SelectedRows[0].Index;
@@ -380,10 +356,18 @@ namespace Test_colloquio
         {
             for (int c = 0; c < grid.Columns.Count; c++)
             {
-                object tmp              = grid.Rows[a].Cells[c].Value;
-                grid.Rows[a].Cells[c].Value = grid.Rows[b].Cells[c].Value;
-                grid.Rows[b].Cells[c].Value = tmp;
+                (grid.Rows[a].Cells[c].Value, grid.Rows[b].Cells[c].Value) =
+                    (grid.Rows[b].Cells[c].Value, grid.Rows[a].Cells[c].Value);
             }
+        }
+
+        private static void MostraErroreDb(Exception ex)
+        {
+            MessageBox.Show(
+                $"Errore di accesso al database:\n\n{ex.Message}",
+                "Errore DB",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
         }
     }
 }

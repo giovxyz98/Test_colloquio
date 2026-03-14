@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Test colloquio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64cf350ad5ab4815e8c546c43176a95923744c60")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8588733ab5187d0fa026cee76bceaa12480f7098")]
 [assembly: System.Reflection.AssemblyProductAttribute("Test colloquio")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Test colloquio")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\winforms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:winforms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\shared\\config\\predefiniti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:shared\\config\\predefiniti.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\shared\\models\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:shared\\models\\models.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\winforms\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:winforms\\forms\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\winforms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:winforms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\config.ini||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|solutionrelative:config.ini||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E2ADDE5D-1491-6CAC-3730-34162AE06047}|Test colloquio.csproj|c:\\users\\giova\\source\\repos\\test colloquio\\test colloquio.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -26,17 +34,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "Models.cs",
+              "DocumentMoniker": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\Shared\\Models\\Models.cs",
+              "RelativeDocumentMoniker": "Shared\\Models\\Models.cs",
+              "ToolTip": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\Shared\\Models\\Models.cs",
+              "RelativeToolTip": "Shared\\Models\\Models.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA+wAUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T06:11:54.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "config.ini",
+              "DocumentMoniker": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\config.ini",
+              "RelativeDocumentMoniker": "config.ini",
+              "ToolTip": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\config.ini",
+              "RelativeToolTip": "config.ini",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002768|",
+              "WhenOpened": "2026-03-14T05:59:01.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\WinForms\\Program.cs",
               "RelativeDocumentMoniker": "WinForms\\Program.cs",
               "ToolTip": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\WinForms\\Program.cs",
               "RelativeToolTip": "WinForms\\Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAC0AAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAwAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-13T22:06:24.369Z",
               "EditorCaption": ""
@@ -49,26 +83,27 @@
               "RelativeDocumentMoniker": "WinForms\\Forms\\Form1.cs",
               "ToolTip": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\WinForms\\Forms\\Form1.cs",
               "RelativeToolTip": "WinForms\\Forms\\Form1.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAwDIAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T21:55:49.576Z"
+              "WhenOpened": "2026-03-13T21:55:49.576Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Predefiniti.cs",
               "DocumentMoniker": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\Shared\\Config\\Predefiniti.cs",
               "RelativeDocumentMoniker": "Shared\\Config\\Predefiniti.cs",
               "ToolTip": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\Shared\\Config\\Predefiniti.cs",
               "RelativeToolTip": "Shared\\Config\\Predefiniti.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAuwBEAAAB2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-13T21:55:08.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Test colloquio.csproj",
               "DocumentMoniker": "C:\\Users\\Giova\\source\\repos\\Test colloquio\\Test colloquio.csproj",
               "RelativeDocumentMoniker": "Test colloquio.csproj",
