@@ -15,7 +15,7 @@ namespace Test_colloquio
         // Valore di default: LocalDB, usabile senza installazione completa.
         // Sovrascrivibile nel file config.ini sotto [Database].
         public static string ConnectionString { get; set; } =
-            @"Server=(localdb)\MSSQLLocalDB;Database=Nolex;Trusted_Connection=True;";
+            @"Server=localhost\SQLEXPRESS;Database=Test_colloquio;Trusted_Connection=True;TrustServerCertificate=True;";
     }
 
     /// <summary>[Ricerca] - ricerca pre-impostata all'avvio</summary>

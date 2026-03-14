@@ -1,0 +1,78 @@
+Per proseguire la fase del colloquio tecnico Ti vorremmo sottoporre ad un breve test di programmazione.
+Per qualsiasi domanda tecnica può rispondere a questa email.
+Si prega di dare avviso di avvenuta lettura.
+
+Di seguito il Test:
+
+Siano dati un elenco di esami (es. "RX mano Dx", "RMN cranio", "Eco Addome"), un elenco di parti del corpo (es. Testa, Arti superiori,
+Addome,Torace) e un elenco di ambulatori (stanze) (es. Radiologia, Tac1, Tac2, Risonanza, EcografiaPrivitera, EcografiaMassimino, EcografiaDoppler).
+
+Gli esami hanno come attibuti:
+- un "CodiceMinisteriale" alfanumerico (max 10 caratteri)
+- un "CodiceInterno" alfanumerico (max 10 caratteri)
+- una "DescrizioneEsame" alfanumerico (max 100 caratteri) che contiene ladenominazione dell'esame di cui sopra.
+
+Gli esami sono legati ad uno o più ambulatori e ad una singola parte del corpo (es. "Eco Addome" può essere effettuato sia nell'ambulatorio "EcografiaPrivitera" che in "EcografiaMassimino").
+
+Per il test il candidato inventerà i dati necessari per l'esecuzione del programma finale. La quantità dei dati non è importante, se non per valutare la completezza e la corretta esecuzione. Naturalmente la corretta esecuzione del programma non dovrà dipendere dalla quantità di dati presenti.
+
+I dati dovranno essere gestiti in ambiente SQL Server (di qualunque tipo, purchè alla fine importabile in qualche modo in MS SQL Server).
+
+Il programma dovrà essere realizzato utilizzando C#, Winforms, NET 4.5 o superiore, Visual Studio 2017 o superiore.
+Il programma dovrà essere poi convertito per il funzionamento web in .Net Core MVC
+
+L'interfaccia del programma consisterà in un form contenente tre pannelli affiancati, il primo per gli ambulatori, il secondo, a destra del primo, per le parti del corpo, ed il terzo, ancora più a destra, per gli esami. Un pulsante permetterà poi di confermare la scelta di selezione di un esame.
+La selezione dell'ambulatorio comporta la visualizzazione della lista di tutte le parti del corpo legate agli esami presenti nell'ambulatorio selezionato.
+La selezione della parte del corpo comporta la visualizzazione di tutti gli esami appartenenti all'ambulatorio selezionato e alla parte del corpo scelta.
+
+All'avvio del form il primo elemento del primo pannello dovrà essere selezionato per default.
+La selezione di qualunque elemento dei primi due pannelli comporterà l'aggiornamento in cascata dei dati visualizzati nel pannello o pannelli a
+destra di quello contenente l'elemento selezionato, considerando selezionatoil primo elemento dei dati aggiornati.
+
+Il form contiene anche un pannello per effettuare una ricerca testuale case insensitive sugli esami. Occorre dare la possibilità di scegliere se cercare in "codiceMinisteriale", "CodiceInterno" o "DescrizioneEsame". La ricerca dovrà essere effettuata sia sul campo complessivo che su parte di esso.
+L'avvio alla ricerca avverrà tramite pulsante apposito o pressione del tasto Invio mentre si scrive la stringa cercata. Il risultato della ricerca deve essere riportato nel contenuto dei tre pannelli, permettendo la navigazione nei soli esami che soddifano la ricerca. Inserire anche un tasto di reset "Vedi tutti".
+
+Effettuata la ricerca verranno visualizzati solo gli ambulatori e parti del corpo che contengono esami compresi tra quelli risultanti dalla ricerca stessa.
+Gli esami visualizzati nell'ultimo pannello dovranno comunque sempre rispettare le selezioni nei primi due pannelli.
+
+Nel form è presente anche una griglia in cui verranno inseriti man mano, con tutte le proprietà, gli esami scelti tramite il pulsante di conferma scelta.
+Vi devono essere dei pulsanti di cancellazione della riga e di modifica dell'ordine di visualizzazione delle righe.
+
+Nell'ipotesi di future estensioni del programma, deve essere previsto il caricamento, se presente nella cartella del programma, di un file di
+configurazione con estensione .ini avente una struttura a sezioni, in cui ogni sezione è contraddistinta da un nome tra parentesi quadre (es. [sezione1]).
+I vari settaggi sono delle linee di testo sotto ogni sezione, nella forma:
+nomevar = valore.
+I valori potranno essere di vari tipi, numeri o stringhe.
+Se stringhe, i valori andranno delimitati da ".
+Le linee inizianti con '#' sono commenti.
+
+Frammento di esempio (le stringhe qui usate sono solo un esempio):
+
+[StampaServer]
+StampaServerEnabled = 1
+UpdateInterval = 3
+
+[Archivio]
+#Percorso SQL
+ArchivioPath = "CLEARCANVAS64PC\IMAGESERVER2"
+CatalogName = "FastprintProDoca"
+#MaxStorageDays = 1000
+MaxStorageDaysCheckInterval = 10
+
+[Dicom]
+#DCMColPrintProcessServerAdditionalOptions = "-v -d +d"
+DCMColPrintProcessServerAdditionalOptions = ""
+#DCMBNPrintProcessServerAdditionalOptions = "-v -d"
+DCMBNPrintProcessServerAdditionalOptions = ""
+
+
+Ogni sezione nel file .ini corrisponderà, nel programma, ad una classe statica avente per nome la stringa "Predefiniti_" seguita dal nome della sezione.
+Queste classe statiche, contenenti solo proprietà, conterranno i valori di default necessari per le varie sezioni o funzioni del programma.
+Il codice nel programma referenzierà quindi direttamente queste proprietà per i valori iniziali del suo funzionamento.
+I valori nel file di configurazione inizializzeranno le proprietà nelle classi statiche aventi corrispondente nome sezione e nomevar.
+Se una proprietà non ha una corrispondente linea di inizializzazione nel file .ini, essa manterrà il valore con cui è stata dichiarata nella classe statica.
+Il codice che effettua il caricamento ed assegnazione di tutti questi valori deve essere indipendente sia dal nome delle proprietà che da quello delle sezioni, in modo che la sole cose che si debbano fare nel caso siano necessarie nuove inizializzazioni per nuove sezioni del programma siano quelle di creare le classi statiche con le varie proprietà e l'inserimento dei valori di inizializzazione nel file .ini sotto la sezione corretta.
+Deve essere effettuata una verifica di congruità del tipo per ogni stringa di configurazione.
+Le stringhe di inizializzazione non riconosciute devono essere ignorate.
+
+Il programma, usando il file di configurazione sopra descritto, deve prevedere la possibilità di settare una ricerca predefinita e un tipo di ricerca predefinita tra quelle sopra descritte

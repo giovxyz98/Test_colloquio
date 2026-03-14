@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace Test_colloquio
 {
@@ -10,6 +11,7 @@ namespace Test_colloquio
     /// </summary>
     public class Repository
     {
+        private readonly string _connectionString;
         // ----------------------------------------------------------------
         // Dati statici di esempio
         // ----------------------------------------------------------------
@@ -70,7 +72,7 @@ namespace Test_colloquio
         // Metodi pubblici — stesse firme della versione con DB
         // ----------------------------------------------------------------
 
-        public Repository(string connectionString) { /* ignorato nel mock */ }
+        public Repository(string connectionString) { _connectionString = connectionString; }
 
         public List<Ambulatorio> GetAmbulatori(List<int> filtroEsameIds = null)
         {
@@ -137,6 +139,34 @@ namespace Test_colloquio
             })
             .OrderBy(e => e.DescrizioneEsame)
             .ToList();
+        }
+
+        // ----------------------------------------------------------------
+        // Scrittura DB
+        // ----------------------------------------------------------------
+
+        /// <summary>
+        /// Inserisce un nuovo esame nella tabella Esami e restituisce l'Id generato.
+        /// </summary>
+        public int AddEsame(Esame esame)
+        {
+            const string sql = @"
+                INSERT INTO Esami (CodiceMinisteriale, CodiceInterno, DescrizioneEsame, IdParteCorpo, DurataMinuti, Attivo)
+                VALUES (@CodMin, @CodInt, @Descr, @IdPC, @Durata, @Attivo);
+                SELECT CAST(SCOPE_IDENTITY() AS INT);";
+
+            using var conn = new SqlConnection(_connectionString);
+            conn.Open();
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@CodMin",  esame.CodiceMinisteriale);
+            cmd.Parameters.AddWithValue("@CodInt",  esame.CodiceInterno);
+            cmd.Parameters.AddWithValue("@Descr",   esame.DescrizioneEsame);
+            cmd.Parameters.AddWithValue("@IdPC",    esame.IdParteCorpo);
+            cmd.Parameters.AddWithValue("@Durata",  (object)esame.DurataMinuti ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@Attivo",  esame.Attivo);
+
+            esame.Id = (int)cmd.ExecuteScalar();
+            return esame.Id;
         }
 
         // ----------------------------------------------------------------
