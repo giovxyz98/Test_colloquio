@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="../TestColloquio.Shared/TestColloquio.Shared.csproj" Id="476c213e-e423-4fcc-a64d-7578927ba0df" />
   <Project Path="Test colloquio.csproj" />
+  <Project Path="TestColloquio.Web/TestColloquio.Web.csproj" />
 </Solution>

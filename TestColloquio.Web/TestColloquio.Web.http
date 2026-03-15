@@ -1,0 +1,6 @@
+@TestColloquio.Web_HostAddress = http://localhost:5106
+
+GET {{TestColloquio.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
